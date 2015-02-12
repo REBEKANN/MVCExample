@@ -4,7 +4,7 @@ package com.mrjaffesclass.apcs.mvc.template;
  * This is the message payload class.  Instantiate this class when sending
  * field / value message data for the up/down buttons
  * 
- * @author Roger Jaffe
+ * @author Rebekah Leslie and Ann Tran
  * @version 1.0
  */
 public class MessagePayload {
