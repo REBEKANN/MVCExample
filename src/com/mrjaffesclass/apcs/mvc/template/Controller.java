@@ -3,10 +3,10 @@ import com.mrjaffesclass.apcs.messenger.*;
 
 /**
  * 
- * The Controller is the master of the App you're writing. It instantiates the
- * view and the model, receives messages from the View in response to user
+ * The Controller is the master of the Application you're writing. It instantiates 
+ * the view and the model, receives messages from the View in response to user
  * interface (UI) actions like clicking a button, changing an input field, 
- * etc.  It also sends and receives messages to the Model to commuincate
+ * etc.  It also sends and receives messages to the Model to communicate
  * changes required and changes made to the Model variables.  
  *
  * @author Roger Jaffe
@@ -53,20 +53,21 @@ public class Controller implements MessageHandler {
    * "this" refers to this controller object.
    */
   public void init() {
-    // This is where you would subscribe to any messages the controller
-    // would need to process
-    // A sample subscriber call would be like...
-    //mvcMessaging.subscribe("view:toggleButtonClick", this);
+    mvcMessaging.subscribe("view:ageButtonPressed:controller", this);
+    mvcMessaging.subscribe("view:monthButtonPressed:controller", this); 
+    mvcMessaging.subscribe("view:dayButtonPressed:controller", this);
   }
 
   @Override
   public void messageHandler(String messageName, Object messagePayload) {
     if (messagePayload != null) {
-      System.out.println("MSG: received by controller: "+messageName+" | "+messagePayload.toString());
+      System.out.println("RCV (controller): "+messageName+" | "+messagePayload.toString());
     } else {
-      System.out.println("MSG: received by controller: "+messageName+" | No data sent");
+      System.out.println("RCV (controller): "+messageName+" | No data sent");
     }
-    // This is where the controller would handle any messages
+    if (messageName.equals("view:changeButton")) {
+      mvcMessaging.notify("controller:changeButton", messagePayload, true);          
+    }
   }
 
   /**
@@ -80,3 +81,4 @@ public class Controller implements MessageHandler {
   }
   
 }
+
